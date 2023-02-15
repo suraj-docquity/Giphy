@@ -19,7 +19,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UTh-1a-k8i">
                                 <rect key="frame" x="8" y="67" width="377" height="710"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="qme-WD-kQ4">
                                     <size key="itemSize" width="170" height="156"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -77,7 +77,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-631.29770992366412" y="734.50704225352115"/>
+            <point key="canvasLocation" x="-514" y="735"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Gyf-LI-1PV">
@@ -106,22 +106,67 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Favorite Page" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dFd-aD-Eyk">
-                                <rect key="frame" x="109" y="408" width="174" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BU2-0g-dg1">
+                                <rect key="frame" x="8" y="67" width="377" height="710"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Dpt-MO-77M">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="fav-cell" id="YLD-XK-NUc" customClass="FavoriteCollectionViewCell" customModule="Giphy" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="180" height="150"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="lsE-tY-fbn">
+                                            <rect key="frame" x="0.0" y="0.0" width="180" height="150"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty-img" translatesAutoresizingMaskIntoConstraints="NO" id="i4J-gR-mLS">
+                                                    <rect key="frame" x="8" y="8" width="164" height="134"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="164" id="L9c-fU-dgB"/>
+                                                        <constraint firstAttribute="height" constant="134" id="PAE-Cq-F9A"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="i4J-gR-mLS" firstAttribute="top" secondItem="lsE-tY-fbn" secondAttribute="top" constant="8" id="5oX-zf-Hb5"/>
+                                                <constraint firstAttribute="bottom" secondItem="i4J-gR-mLS" secondAttribute="bottom" constant="8" id="IfS-NR-s0r"/>
+                                                <constraint firstAttribute="trailing" secondItem="i4J-gR-mLS" secondAttribute="trailing" constant="8" id="XRe-XX-fb4"/>
+                                                <constraint firstItem="i4J-gR-mLS" firstAttribute="leading" secondItem="lsE-tY-fbn" secondAttribute="leading" constant="8" id="uED-K6-dWf"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="180" height="150"/>
+                                        <connections>
+                                            <outlet property="favGifImgView" destination="i4J-gR-mLS" id="hoE-tA-He8"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="ev5-gv-h7g" id="6lZ-z7-kG7"/>
+                                    <outlet property="delegate" destination="ev5-gv-h7g" id="t5w-V4-CVK"/>
+                                </connections>
+                            </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fo0-Qe-oxx"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="fo0-Qe-oxx" firstAttribute="trailing" secondItem="BU2-0g-dg1" secondAttribute="trailing" constant="8" id="K1G-Ba-vEp"/>
+                            <constraint firstItem="BU2-0g-dg1" firstAttribute="top" secondItem="fo0-Qe-oxx" secondAttribute="top" constant="8" id="Svc-6n-EF4"/>
+                            <constraint firstItem="BU2-0g-dg1" firstAttribute="bottom" secondItem="fo0-Qe-oxx" secondAttribute="bottom" constant="8" id="TrX-BS-cXL"/>
+                            <constraint firstItem="BU2-0g-dg1" firstAttribute="leading" secondItem="fo0-Qe-oxx" secondAttribute="leading" constant="8" id="e5Z-pm-rno"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="JVX-Fq-4vf"/>
+                    <connections>
+                        <outlet property="FavCollectionView" destination="BU2-0g-dg1" id="VGs-rf-Vfb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tl9-yO-m8C" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="473" y="735"/>
+            <point key="canvasLocation" x="396" y="735"/>
         </scene>
     </scenes>
     <resources>
@@ -129,6 +174,9 @@
         <image name="homekit" catalog="system" width="128" height="104"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

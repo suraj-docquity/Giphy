@@ -14,15 +14,13 @@ class HomeViewController: UIViewController{
     private var homeViewModel = HomeViewModel()
     private var gifData:GifData?
     private var gifLinks = [String]()
-    var gifItems = [GifItemList]()
 
-    
     private var cancellables = Set<AnyCancellable>()
     private var tapGesture : UITapGestureRecognizer!
     
     @IBOutlet var homeGifCollectionView: UICollectionView!
     
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let homeViewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +32,6 @@ class HomeViewController: UIViewController{
 extension HomeViewController {
     func configuration() {
         initViewModel()
-        getAllItems()
     }
     
     

@@ -9,24 +9,9 @@ import Foundation
 
 extension HomeViewController {
     
-    func getAllItems(){
-        do
-        {
-            gifItems = try context.fetch(GifItemList.fetchRequest())
-            print("items fetched : ",gifItems)
-//            DispatchQueue.main.async {
-//                self.homeGifCollectionView.reloadData()
-//            }
-//            homeGifCollectionView.reloadData()
-        }
-        catch{
-            // TODO: Handle Errors
-        }
-    }
-    
     func createItem(gifItem : GifDataDB){
         
-        var newItem = GifItemList(context: context)
+        var newItem = GifItemList(context: homeViewContext)
         newItem.gifID = gifItem.gifID
         newItem.gifTitle = gifItem.gifTitle
         newItem.gifRating = gifItem.gifRating
@@ -34,20 +19,40 @@ extension HomeViewController {
         print("item saved : ",newItem)
         
         do{
-            try context.save()
-            getAllItems()
+            try homeViewContext.save()
+        }
+        catch{
+            // TODO: Handle Errors
+        }
+    }
+}
+
+
+extension FavoriteViewController {
+    
+    func getAllItems() {
+        do
+        {
+            favGifItems = try favViewContext.fetch(GifItemList.fetchRequest())
+//            print("items fetched : ",favGifItems)
+            DispatchQueue.main.async {
+                self.FavCollectionView.reloadData()
+            }
         }
         catch{
             // TODO: Handle Errors
         }
     }
     
-    func deleteItem(){
-        do{
-            
+    func getFavGifURL(){
+        for i in favGifItems{
+//            print(i.gifURL!)
+            favGifLinks.append(i.gifURL!)
         }
-        catch{
-            // TODO: Handle Errors
+        DispatchQueue.main.async {
+            self.FavCollectionView.reloadData()
         }
     }
+    
+    
 }
