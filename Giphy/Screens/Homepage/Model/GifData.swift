@@ -16,6 +16,9 @@ struct GifData :Codable{
 
 
 struct DataObject :Codable {
+    var id : String
+    var title : String
+    var rating : String
     var images : ImgObject
 }
 
@@ -29,8 +32,14 @@ struct MetaObject :Codable{
 
 struct ImgObject :Codable{
     var original : URIObject
+    var downsized : URIDownsizedObject
 }
 
 struct URIObject :Codable{
+    var url : String
+}
+
+
+struct URIDownsizedObject :Codable{
     var url : String
 }

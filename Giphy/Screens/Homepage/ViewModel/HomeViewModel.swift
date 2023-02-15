@@ -29,8 +29,15 @@ final class HomeViewModel : ObservableObject{
                 
             }, receiveValue: { [weak self] value in
                 self?.gifData = value
+                
+                // original sizen urls
+//                for i in value.data {
+//                    self?.gifLinks.append(i.images.original.url)
+//                }
+                
+                // for downsized urls
                 for i in value.data {
-                    self?.gifLinks.append(i.images.original.url)
+                    self?.gifLinks.append(i.images.downsized.url)
                 }
             }).store(in: &cancellables)
         
