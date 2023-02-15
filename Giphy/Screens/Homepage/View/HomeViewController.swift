@@ -16,6 +16,7 @@ class HomeViewController: UIViewController{
     private var gifLinks = [String]()
     
     private var cancellables = Set<AnyCancellable>()
+    private var tapGesture : UITapGestureRecognizer!
     
     @IBOutlet var homeGifCollectionView: UICollectionView!
     
@@ -64,14 +65,14 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return homeViewModel.gifLinks.count
+        return gifLinks.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = homeGifCollectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! HomeGifCollectionViewCell
         
-        guard let gifImgURL = URL(string: self.homeViewModel.gifLinks[indexPath.row]) else {
+        guard let gifImgURL = URL(string: self.gifLinks[indexPath.row]) else {
             cell.gifImgView.image = UIImage(named: "empty-img.png")
             return cell
         }
@@ -83,8 +84,21 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             cell.gifImgView.contentMode = .scaleToFill
             cell.gifImgView.layer.cornerRadius = 5
             
-            
+            tapGesture = UITapGestureRecognizer(target: self, action: #selector(didDoubleTap(_:)))
+            tapGesture.numberOfTapsRequired = 2
+            cell.addGestureRecognizer(tapGesture)
         
         return cell
+    }
+}
+
+extension HomeViewController {
+    
+    @objc func didDoubleTap(_ gesture: UITapGestureRecognizer){
+        // tap to location to get index of cell in collection
+        let tap = gesture.location(in: self.homeGifCollectionView)
+        let indexPath : NSIndexPath = self.homeGifCollectionView.indexPathForItem(at: tap)! as NSIndexPath
+        
+        print("Double tapped index \(indexPath.row) ",gifLinks[indexPath.row])
     }
 }
