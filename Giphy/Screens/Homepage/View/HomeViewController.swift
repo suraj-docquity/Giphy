@@ -14,11 +14,15 @@ class HomeViewController: UIViewController{
     private var homeViewModel = HomeViewModel()
     private var gifData:GifData?
     private var gifLinks = [String]()
+    var gifItems = [GifItemList]()
+
     
     private var cancellables = Set<AnyCancellable>()
     private var tapGesture : UITapGestureRecognizer!
     
     @IBOutlet var homeGifCollectionView: UICollectionView!
+    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +34,7 @@ class HomeViewController: UIViewController{
 extension HomeViewController {
     func configuration() {
         initViewModel()
+        getAllItems()
     }
     
     
@@ -99,6 +104,13 @@ extension HomeViewController {
         let tap = gesture.location(in: self.homeGifCollectionView)
         let indexPath : NSIndexPath = self.homeGifCollectionView.indexPathForItem(at: tap)! as NSIndexPath
         
-        print("Double tapped index \(indexPath.row) ",gifLinks[indexPath.row])
+//        print("Double tapped index \(indexPath.row) ",gifLinks[indexPath.row])
+//        print("Double tapped index \(indexPath.row) ",gifData?.data[indexPath.row])
+
+        let gifTappedData = gifData?.data[indexPath.row]
+        
+        let newGif = GifDataDB(gifID: gifTappedData!.id, gifTitle: gifTappedData!.title, gifRating: gifTappedData!.rating, gifURL: (gifTappedData?.images.downsized.url)!)
+
+        createItem(gifItem: newGif)
     }
 }

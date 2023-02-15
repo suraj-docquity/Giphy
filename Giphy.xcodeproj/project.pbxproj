@@ -27,6 +27,8 @@
 		9ADA3243299CBFA100734EC9 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9ADA3242299CBFA100734EC9 /* SDWebImageMapKit */; };
 		9ADA3246299CEEB300734EC9 /* GifItemList+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADA3244299CEEB300734EC9 /* GifItemList+CoreDataClass.swift */; };
 		9ADA3247299CEEB300734EC9 /* GifItemList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADA3245299CEEB300734EC9 /* GifItemList+CoreDataProperties.swift */; };
+		9ADA324A299CF2A900734EC9 /* GifDataDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADA3249299CF2A900734EC9 /* GifDataDB.swift */; };
+		9ADA324C299CFBF000734EC9 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADA324B299CFBF000734EC9 /* DatabaseManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,8 @@
 		9ADA323D299CBE2900734EC9 /* HomeGifCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeGifCollectionViewCell.swift; sourceTree = "<group>"; };
 		9ADA3244299CEEB300734EC9 /* GifItemList+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GifItemList+CoreDataClass.swift"; sourceTree = "<group>"; };
 		9ADA3245299CEEB300734EC9 /* GifItemList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GifItemList+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		9ADA3249299CF2A900734EC9 /* GifDataDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifDataDB.swift; sourceTree = "<group>"; };
+		9ADA324B299CFBF000734EC9 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				9ADA3235299C9D9B00734EC9 /* APIManager.swift */,
+				9ADA324B299CFBF000734EC9 /* DatabaseManager.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -224,6 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				9ADA3237299C9FCE00734EC9 /* GifData.swift */,
+				9ADA3249299CF2A900734EC9 /* GifDataDB.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -430,10 +436,12 @@
 				9ADA3232299C982A00734EC9 /* HomeViewController.swift in Sources */,
 				9A3CD0282999FB6400659B63 /* AppDelegate.swift in Sources */,
 				9A3CD02A2999FB6400659B63 /* SceneDelegate.swift in Sources */,
+				9ADA324C299CFBF000734EC9 /* DatabaseManager.swift in Sources */,
 				9ADA3246299CEEB300734EC9 /* GifItemList+CoreDataClass.swift in Sources */,
 				9ADA3247299CEEB300734EC9 /* GifItemList+CoreDataProperties.swift in Sources */,
 				9A3CD0322999FB6400659B63 /* Giphy.xcdatamodeld in Sources */,
 				9A6A53FF299A428800BA8ED9 /* FavoriteViewController.swift in Sources */,
+				9ADA324A299CF2A900734EC9 /* GifDataDB.swift in Sources */,
 				9ADA3234299C993C00734EC9 /* Constant.swift in Sources */,
 				9ADA3236299C9D9B00734EC9 /* APIManager.swift in Sources */,
 			);
