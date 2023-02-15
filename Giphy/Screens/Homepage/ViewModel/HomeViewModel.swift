@@ -19,7 +19,8 @@ final class HomeViewModel : ObservableObject{
     func fetchGifData(){
         APIManager.shared.fetchGIFData()
             .receive(on: DispatchQueue.main) // perfoms receive value part in main thread
-            .sink(receiveCompletion:{ completion in
+            .sink(
+                receiveCompletion:{ completion in
                 switch completion{
                 case .finished:
                     print("Data receiving complete")
@@ -27,7 +28,8 @@ final class HomeViewModel : ObservableObject{
                     print("Data not recived with \(error)")
                 }
                 
-            }, receiveValue: { [weak self] value in
+            },
+                receiveValue: { [weak self] value in
                 self?.gifData = value
                 
                 // original sizen urls

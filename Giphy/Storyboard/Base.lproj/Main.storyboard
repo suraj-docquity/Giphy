@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="UTh-1a-k8i">
-                                <rect key="frame" x="8" y="67" width="377" height="710"/>
+                                <rect key="frame" x="8" y="103" width="377" height="674"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="qme-WD-kQ4">
                                     <size key="itemSize" width="170" height="156"/>
@@ -60,14 +60,23 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="eRl-u6-Oyt"/>
                                 </connections>
                             </collectionView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dx9-RK-xBG">
+                                <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                                <items>
+                                    <navigationItem title="Gif Collection" id="jxH-C0-Tt7"/>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="dx9-RK-xBG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="6kd-Fb-5TE"/>
                             <constraint firstItem="UTh-1a-k8i" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="8" id="8qU-ud-SiK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="UTh-1a-k8i" secondAttribute="trailing" constant="8" id="9QJ-20-Gc4"/>
+                            <constraint firstItem="dx9-RK-xBG" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Whi-pJ-zXM"/>
+                            <constraint firstItem="UTh-1a-k8i" firstAttribute="top" secondItem="dx9-RK-xBG" secondAttribute="bottom" id="cwF-OO-ICN"/>
                             <constraint firstItem="UTh-1a-k8i" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="jFH-ct-pmE"/>
-                            <constraint firstItem="UTh-1a-k8i" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="zEH-QT-t1v"/>
+                            <constraint firstItem="dx9-RK-xBG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="oUE-Uy-hgk"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" image="homekit" catalog="system" id="zKe-gO-WwR"/>
@@ -77,7 +86,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-514" y="735"/>
+            <point key="canvasLocation" x="-515.26717557251902" y="734.50704225352115"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Gyf-LI-1PV">
@@ -107,7 +116,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BU2-0g-dg1">
-                                <rect key="frame" x="8" y="67" width="377" height="710"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="749"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Dpt-MO-77M">
                                     <size key="itemSize" width="128" height="128"/>
@@ -149,14 +158,24 @@
                                     <outlet property="delegate" destination="ev5-gv-h7g" id="t5w-V4-CVK"/>
                                 </connections>
                             </collectionView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pY4-Db-r9l">
+                                <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                                <items>
+                                    <navigationItem title="Favorites Gifs" id="ec4-tO-e4T"/>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fo0-Qe-oxx"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="fo0-Qe-oxx" firstAttribute="trailing" secondItem="BU2-0g-dg1" secondAttribute="trailing" constant="8" id="K1G-Ba-vEp"/>
-                            <constraint firstItem="BU2-0g-dg1" firstAttribute="top" secondItem="fo0-Qe-oxx" secondAttribute="top" constant="8" id="Svc-6n-EF4"/>
-                            <constraint firstItem="BU2-0g-dg1" firstAttribute="bottom" secondItem="fo0-Qe-oxx" secondAttribute="bottom" constant="8" id="TrX-BS-cXL"/>
-                            <constraint firstItem="BU2-0g-dg1" firstAttribute="leading" secondItem="fo0-Qe-oxx" secondAttribute="leading" constant="8" id="e5Z-pm-rno"/>
+                            <constraint firstAttribute="bottom" secondItem="BU2-0g-dg1" secondAttribute="bottom" id="7mc-Vl-yaP"/>
+                            <constraint firstItem="BU2-0g-dg1" firstAttribute="top" secondItem="pY4-Db-r9l" secondAttribute="bottom" id="BGG-Ib-jSQ"/>
+                            <constraint firstItem="BU2-0g-dg1" firstAttribute="leading" secondItem="fo0-Qe-oxx" secondAttribute="leading" id="cAX-77-0yV"/>
+                            <constraint firstItem="pY4-Db-r9l" firstAttribute="leading" secondItem="fo0-Qe-oxx" secondAttribute="leading" id="gv6-p1-Dqs"/>
+                            <constraint firstAttribute="trailing" secondItem="pY4-Db-r9l" secondAttribute="trailing" id="lI5-3O-F9j"/>
+                            <constraint firstItem="BU2-0g-dg1" firstAttribute="trailing" secondItem="fo0-Qe-oxx" secondAttribute="trailing" id="pBx-dV-HMP"/>
+                            <constraint firstItem="BU2-0g-dg1" firstAttribute="top" secondItem="pY4-Db-r9l" secondAttribute="bottom" id="uQT-wZ-YS8"/>
+                            <constraint firstItem="pY4-Db-r9l" firstAttribute="top" secondItem="fo0-Qe-oxx" secondAttribute="top" id="uwV-fC-Vt1"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="JVX-Fq-4vf"/>
@@ -166,7 +185,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tl9-yO-m8C" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="396" y="735"/>
+            <point key="canvasLocation" x="394.6564885496183" y="734.50704225352115"/>
         </scene>
     </scenes>
     <resources>

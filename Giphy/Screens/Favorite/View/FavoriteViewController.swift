@@ -37,7 +37,6 @@ class FavoriteViewController: UIViewController {
 extension FavoriteViewController : UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(favGifItems.count)
         return favGifLinks.count
     }
     
