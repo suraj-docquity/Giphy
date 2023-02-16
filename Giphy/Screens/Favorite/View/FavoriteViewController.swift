@@ -94,11 +94,17 @@ extension FavoriteViewController {
         trash.alpha = 0
         gestureView.addSubview(trash)
         
-        UIView.animate(withDuration: 0.8,animations: {
+        UIView.animate(withDuration: 0.2,animations: {
             trash.alpha = 1
         }, completion: { done in
             if(done){
-                trash.removeFromSuperview()
+                UIView.animate(withDuration: 1, animations: {
+                    trash.alpha = 0
+                }, completion: { done in
+                    if(done){
+                        trash.removeFromSuperview()
+                    }
+                })
             }
         })
     }

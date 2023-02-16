@@ -141,15 +141,22 @@ extension HomeViewController {
         let size = gestureView.frame.size.width/4
         let heart = UIImageView(image: UIImage(systemName: "heart.circle.fill"))
         heart.frame = CGRect(x: (gestureView.frame.size.width - size)/2, y: (gestureView.frame.size.height - size)/2, width: size, height: size)
-        heart.tintColor = UIColor(red: 0.89, green: 0.26, blue: 0.20, alpha: 1.00)
+        
+        heart.tintColor = .white
         heart.alpha = 0
         gestureView.addSubview(heart)
         
-        UIView.animate(withDuration: 1,animations: {
+        UIView.animate(withDuration: 0.2,animations: {
             heart.alpha = 1
         }, completion: { done in
             if(done){
-                heart.removeFromSuperview()
+                UIView.animate(withDuration: 1, animations: {
+                    heart.alpha = 0
+                }, completion: { done in
+                    if(done){
+                        heart.removeFromSuperview()
+                    }
+                })
             }
         })
     }
