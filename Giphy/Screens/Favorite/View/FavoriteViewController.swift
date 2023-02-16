@@ -10,7 +10,6 @@ import SDWebImage
 
 class FavoriteViewController: UIViewController {
     
-    var favGifLinks = [String]()
     private var tapGesture : UITapGestureRecognizer!
     
     var favGifItems = [GifItemList]()
@@ -24,12 +23,12 @@ class FavoriteViewController: UIViewController {
         super.viewDidLoad()
         
         getAllItems()
-        getFavGifURL()
-        DispatchQueue.main.asyncAfter(deadline: .now()+10){
-            self.FavCollectionView.reloadData()
-        }
-        
 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getAllItems()
     }
 }
 
@@ -37,14 +36,14 @@ class FavoriteViewController: UIViewController {
 extension FavoriteViewController : UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return favGifLinks.count
+        return favGifItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = FavCollectionView.dequeueReusableCell(withReuseIdentifier: "fav-cell", for: indexPath) as! FavoriteCollectionViewCell
         
-        guard let gifImgURL = URL(string: self.favGifLinks[indexPath.row]) else {
+        guard let gifImgURL = URL(string: self.favGifItems[indexPath.row].gifURL!) else {
             cell.favGifImgView.image = UIImage(named: "empty-img.png")
             return cell
         }
@@ -68,14 +67,18 @@ extension FavoriteViewController : UICollectionViewDelegate, UICollectionViewDat
 extension FavoriteViewController {
     
     @objc func didDoubleTap(_ gesture: UITapGestureRecognizer){
+        
         // tap to location to get index of cell in collection
         let tap = gesture.location(in: self.FavCollectionView)
         let indexPath : NSIndexPath = self.FavCollectionView.indexPathForItem(at: tap)! as NSIndexPath
-        
-        print("Double tapped index \(indexPath.row) ",favGifLinks[indexPath.row])
-//        print("Double tapped index \(indexPath.row) ",gifData?.data[indexPath.row])
+
+        let dItem = self.favGifItems[indexPath.row]
+        deleteItem(item: dItem)
     }
 }
+
+
+
 
 
 

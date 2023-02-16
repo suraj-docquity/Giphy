@@ -37,16 +37,16 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty-img" translatesAutoresizingMaskIntoConstraints="NO" id="ozG-2t-kGm">
                                                     <rect key="frame" x="8" y="8" width="164" height="134"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="133" id="BaE-0U-E21"/>
-                                                        <constraint firstAttribute="width" constant="165" id="qa6-fo-Tet"/>
+                                                        <constraint firstAttribute="height" constant="134" id="9Ts-Kq-ozk"/>
+                                                        <constraint firstAttribute="width" constant="164" id="DCi-5f-NO0"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="ozG-2t-kGm" firstAttribute="top" secondItem="3pO-yL-qHL" secondAttribute="top" constant="8" id="19Y-JP-FQo"/>
-                                                <constraint firstAttribute="bottom" secondItem="ozG-2t-kGm" secondAttribute="bottom" constant="8" id="NXF-QL-sTm"/>
-                                                <constraint firstAttribute="trailing" secondItem="ozG-2t-kGm" secondAttribute="trailing" constant="8" id="qwL-tb-c6O"/>
-                                                <constraint firstItem="ozG-2t-kGm" firstAttribute="leading" secondItem="3pO-yL-qHL" secondAttribute="leading" constant="8" id="xWR-ch-fan"/>
+                                                <constraint firstAttribute="trailing" secondItem="ozG-2t-kGm" secondAttribute="trailing" constant="8" id="Jyo-rV-eTZ"/>
+                                                <constraint firstAttribute="bottom" secondItem="ozG-2t-kGm" secondAttribute="bottom" constant="8" id="R4O-ft-ZBP"/>
+                                                <constraint firstItem="ozG-2t-kGm" firstAttribute="leading" secondItem="3pO-yL-qHL" secondAttribute="leading" constant="8" id="UrP-Ve-WMj"/>
+                                                <constraint firstItem="ozG-2t-kGm" firstAttribute="top" secondItem="3pO-yL-qHL" secondAttribute="top" constant="8" id="tW3-Ge-8tk"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="180" height="150"/>
@@ -116,7 +116,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BU2-0g-dg1">
-                                <rect key="frame" x="0.0" y="103" width="393" height="749"/>
+                                <rect key="frame" x="8" y="103" width="377" height="666"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Dpt-MO-77M">
                                     <size key="itemSize" width="128" height="128"/>
@@ -135,16 +135,16 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty-img" translatesAutoresizingMaskIntoConstraints="NO" id="i4J-gR-mLS">
                                                     <rect key="frame" x="8" y="8" width="164" height="134"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="164" id="L9c-fU-dgB"/>
-                                                        <constraint firstAttribute="height" constant="134" id="PAE-Cq-F9A"/>
+                                                        <constraint firstAttribute="width" constant="164" id="35Q-UK-nZL"/>
+                                                        <constraint firstAttribute="height" constant="134" id="CjF-RI-nUq"/>
                                                     </constraints>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="i4J-gR-mLS" firstAttribute="top" secondItem="lsE-tY-fbn" secondAttribute="top" constant="8" id="5oX-zf-Hb5"/>
-                                                <constraint firstAttribute="bottom" secondItem="i4J-gR-mLS" secondAttribute="bottom" constant="8" id="IfS-NR-s0r"/>
-                                                <constraint firstAttribute="trailing" secondItem="i4J-gR-mLS" secondAttribute="trailing" constant="8" id="XRe-XX-fb4"/>
-                                                <constraint firstItem="i4J-gR-mLS" firstAttribute="leading" secondItem="lsE-tY-fbn" secondAttribute="leading" constant="8" id="uED-K6-dWf"/>
+                                                <constraint firstAttribute="trailing" secondItem="i4J-gR-mLS" secondAttribute="trailing" constant="8" id="A4B-oO-Pd8"/>
+                                                <constraint firstAttribute="bottom" secondItem="i4J-gR-mLS" secondAttribute="bottom" constant="8" id="GBe-kI-yWV"/>
+                                                <constraint firstItem="i4J-gR-mLS" firstAttribute="leading" secondItem="lsE-tY-fbn" secondAttribute="leading" constant="8" id="J9j-oj-gnY"/>
+                                                <constraint firstItem="i4J-gR-mLS" firstAttribute="top" secondItem="lsE-tY-fbn" secondAttribute="top" constant="8" id="UVa-5v-7SW"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="180" height="150"/>
@@ -168,14 +168,13 @@
                         <viewLayoutGuide key="safeArea" id="fo0-Qe-oxx"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="BU2-0g-dg1" secondAttribute="bottom" id="7mc-Vl-yaP"/>
-                            <constraint firstItem="BU2-0g-dg1" firstAttribute="top" secondItem="pY4-Db-r9l" secondAttribute="bottom" id="BGG-Ib-jSQ"/>
-                            <constraint firstItem="BU2-0g-dg1" firstAttribute="leading" secondItem="fo0-Qe-oxx" secondAttribute="leading" id="cAX-77-0yV"/>
+                            <constraint firstItem="BU2-0g-dg1" firstAttribute="bottom" secondItem="fo0-Qe-oxx" secondAttribute="bottom" id="cQh-0F-3l5"/>
                             <constraint firstItem="pY4-Db-r9l" firstAttribute="leading" secondItem="fo0-Qe-oxx" secondAttribute="leading" id="gv6-p1-Dqs"/>
                             <constraint firstAttribute="trailing" secondItem="pY4-Db-r9l" secondAttribute="trailing" id="lI5-3O-F9j"/>
-                            <constraint firstItem="BU2-0g-dg1" firstAttribute="trailing" secondItem="fo0-Qe-oxx" secondAttribute="trailing" id="pBx-dV-HMP"/>
-                            <constraint firstItem="BU2-0g-dg1" firstAttribute="top" secondItem="pY4-Db-r9l" secondAttribute="bottom" id="uQT-wZ-YS8"/>
+                            <constraint firstItem="BU2-0g-dg1" firstAttribute="top" secondItem="pY4-Db-r9l" secondAttribute="bottom" id="oe5-FP-cCO"/>
+                            <constraint firstAttribute="trailing" secondItem="BU2-0g-dg1" secondAttribute="trailing" constant="8" id="qKg-Yx-GZN"/>
                             <constraint firstItem="pY4-Db-r9l" firstAttribute="top" secondItem="fo0-Qe-oxx" secondAttribute="top" id="uwV-fC-Vt1"/>
+                            <constraint firstItem="BU2-0g-dg1" firstAttribute="leading" secondItem="fo0-Qe-oxx" secondAttribute="leading" constant="8" id="wVE-I2-IUy"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="JVX-Fq-4vf"/>

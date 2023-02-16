@@ -11,7 +11,6 @@ import Combine
 final class HomeViewModel : ObservableObject{
     
     @Published var gifLinks = [String]()
-    
     @Published var gifData : GifData?
     
     private var cancellables = Set<AnyCancellable>()
@@ -23,7 +22,7 @@ final class HomeViewModel : ObservableObject{
                 receiveCompletion:{ completion in
                 switch completion{
                 case .finished:
-                    print("Data receiving complete")
+                    print()
                 case .failure(let error):
                     print("Data not recived with \(error)")
                 }
@@ -32,7 +31,7 @@ final class HomeViewModel : ObservableObject{
                 receiveValue: { [weak self] value in
                 self?.gifData = value
                 
-                // original sizen urls
+                // original size urls
 //                for i in value.data {
 //                    self?.gifLinks.append(i.images.original.url)
 //                }

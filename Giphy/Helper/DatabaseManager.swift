@@ -11,12 +11,11 @@ extension HomeViewController {
     
     func createItem(gifItem : GifDataDB){
         
-        var newItem = GifItemList(context: homeViewContext)
+        let newItem = GifItemList(context: homeViewContext)
         newItem.gifID = gifItem.gifID
         newItem.gifTitle = gifItem.gifTitle
         newItem.gifRating = gifItem.gifRating
         newItem.gifURL = gifItem.gifURL
-        print("item saved : ",newItem)
         
         do{
             try homeViewContext.save()
@@ -34,7 +33,6 @@ extension FavoriteViewController {
         do
         {
             favGifItems = try favViewContext.fetch(GifItemList.fetchRequest())
-//            print("items fetched : ",favGifItems)
             DispatchQueue.main.async {
                 self.FavCollectionView.reloadData()
             }
@@ -44,15 +42,14 @@ extension FavoriteViewController {
         }
     }
     
-    func getFavGifURL(){
-        for i in favGifItems{
-//            print(i.gifURL!)
-            favGifLinks.append(i.gifURL!)
+    func deleteItem(item : GifItemList){
+        favViewContext.delete(item)
+        do{
+            try favViewContext.save()
+            getAllItems()
         }
-        DispatchQueue.main.async {
-            self.FavCollectionView.reloadData()
+        catch{
+            // TODO: Handle Errors
         }
     }
-    
-    
 }
