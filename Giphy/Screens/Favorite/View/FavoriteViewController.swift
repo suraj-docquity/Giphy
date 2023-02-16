@@ -23,7 +23,7 @@ class FavoriteViewController: UIViewController {
         super.viewDidLoad()
         
         getAllItems()
-
+        FavCollectionView.backgroundColor = UIColor(red: 0.89, green: 0.96, blue: 1.00, alpha: 1.00)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,6 +56,7 @@ extension FavoriteViewController : UICollectionViewDelegate, UICollectionViewDat
         cell.favGifImgView.layer.cornerRadius = 3
         
         cell.layer.cornerRadius = 5
+        cell.backgroundColor =  UIColor(red: 0.98, green: 0.97, blue: 0.95, alpha: 1.00)
         
         tapGesture = UITapGestureRecognizer(target: self, action: #selector(didDoubleTap(_:)))
         tapGesture.numberOfTapsRequired = 2
