@@ -48,16 +48,18 @@ extension FavoriteViewController : UICollectionViewDelegate, UICollectionViewDat
             return cell
         }
             
-            cell.favGifImgView.sd_imageIndicator = SDWebImageActivityIndicator.white
-            cell.favGifImgView.sd_imageIndicator?.startAnimatingIndicator()
-            cell.favGifImgView.sd_setImage(with: gifImgURL, placeholderImage: UIImage(named: "empty-img.png"),options: .continueInBackground,completed: nil)
-            
-            cell.favGifImgView.contentMode = .scaleToFill
-            cell.favGifImgView.layer.cornerRadius = 5
-            
-            tapGesture = UITapGestureRecognizer(target: self, action: #selector(didDoubleTap(_:)))
-            tapGesture.numberOfTapsRequired = 2
-            cell.addGestureRecognizer(tapGesture)
+        cell.favGifImgView.sd_imageIndicator = SDWebImageActivityIndicator.white
+        cell.favGifImgView.sd_imageIndicator?.startAnimatingIndicator()
+        cell.favGifImgView.sd_setImage(with: gifImgURL, placeholderImage: UIImage(named: "empty-img.png"),options: .continueInBackground,completed: nil)
+        
+        cell.favGifImgView.contentMode = .scaleToFill
+        cell.favGifImgView.layer.cornerRadius = 3
+        
+        cell.layer.cornerRadius = 5
+        
+        tapGesture = UITapGestureRecognizer(target: self, action: #selector(didDoubleTap(_:)))
+        tapGesture.numberOfTapsRequired = 2
+        cell.addGestureRecognizer(tapGesture)
         
         return cell
     }
@@ -73,7 +75,32 @@ extension FavoriteViewController {
         let indexPath : NSIndexPath = self.FavCollectionView.indexPathForItem(at: tap)! as NSIndexPath
 
         let dItem = self.favGifItems[indexPath.row]
-        deleteItem(item: dItem)
+        showTrash(gesture)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+            self.deleteItem(item: dItem)
+        })
+    }
+    
+    func showTrash(_ gesture: UITapGestureRecognizer){
+        
+        guard let gestureView = gesture.view else{
+            return
+        }
+        
+        let size = gestureView.frame.size.width/4
+        let trash = UIImageView(image: UIImage(systemName: "trash.circle.fill"))
+        trash.frame = CGRect(x: (gestureView.frame.size.width - size)/2, y: (gestureView.frame.size.height - size)/2, width: size, height: size)
+        trash.tintColor = .white
+        trash.alpha = 0
+        gestureView.addSubview(trash)
+        
+        UIView.animate(withDuration: 0.8,animations: {
+            trash.alpha = 1
+        }, completion: { done in
+            if(done){
+                trash.removeFromSuperview()
+            }
+        })
     }
 }
 

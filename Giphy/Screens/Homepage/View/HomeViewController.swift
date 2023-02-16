@@ -25,6 +25,7 @@ class HomeViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         configuration()
+//        homeGifCollectionView.collectionViewLayout = UICollectionViewFlowLayout()
     }
 }
 
@@ -63,7 +64,7 @@ extension HomeViewController {
 }
 
 
-extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource {
+extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
@@ -79,19 +80,38 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
             return cell
         }
             
-            cell.gifImgView.sd_imageIndicator = SDWebImageActivityIndicator.white
-            cell.gifImgView.sd_imageIndicator?.startAnimatingIndicator()
-            cell.gifImgView.sd_setImage(with: gifImgURL, placeholderImage: UIImage(named: "empty-img.png"),options: .continueInBackground,completed: nil)
-            
-            cell.gifImgView.contentMode = .scaleToFill
-            cell.gifImgView.layer.cornerRadius = 5
-            
-            tapGesture = UITapGestureRecognizer(target: self, action: #selector(didDoubleTap(_:)))
-            tapGesture.numberOfTapsRequired = 2
-            cell.addGestureRecognizer(tapGesture)
+        cell.gifImgView.sd_imageIndicator = SDWebImageActivityIndicator.white
+        cell.gifImgView.sd_imageIndicator?.startAnimatingIndicator()
+        cell.gifImgView.sd_setImage(with: gifImgURL, placeholderImage: UIImage(named: "empty-img.png"),options: .continueInBackground,completed: nil)
+        
+        cell.gifImgView.contentMode = .scaleToFill
+        cell.gifImgView.layer.cornerRadius = 3
+        
+        cell.layer.cornerRadius = 5
+        
+        tapGesture = UITapGestureRecognizer(target: self, action: #selector(didDoubleTap(_:)))
+        tapGesture.numberOfTapsRequired = 2
+        cell.addGestureRecognizer(tapGesture)
         
         return cell
     }
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//
+//        let spacing:CGFloat = 16
+//        let numberOfItemsPerRow:CGFloat = 2
+//        let spacingBetweenCells:CGFloat = 8
+//
+//        let totalSpacing = (2 * spacing) + ((numberOfItemsPerRow - 1) * spacingBetweenCells) //Amount of total spacing in a row
+//
+//        if let collection = self.homeGifCollectionView{
+//            let width = (collection.bounds.width - totalSpacing)/numberOfItemsPerRow
+//            return CGSize(width: width, height: width)
+//        }else{
+//            return CGSize(width: 0, height: 0)
+//        }
+//    }
+    
 }
 
 extension HomeViewController {
@@ -109,5 +129,30 @@ extension HomeViewController {
         let newGif = GifDataDB(gifID: gifTappedData!.id, gifTitle: gifTappedData!.title, gifRating: gifTappedData!.rating, gifURL: (gifTappedData?.images.downsized.url)!)
 
         createItem(gifItem: newGif)
+        showHeart(gesture)
     }
+    
+    func showHeart(_ gesture: UITapGestureRecognizer){
+        
+        guard let gestureView = gesture.view else{
+            return
+        }
+        
+        let size = gestureView.frame.size.width/4
+        let heart = UIImageView(image: UIImage(systemName: "heart.circle.fill"))
+        heart.frame = CGRect(x: (gestureView.frame.size.width - size)/2, y: (gestureView.frame.size.height - size)/2, width: size, height: size)
+        heart.tintColor = UIColor(red: 0.89, green: 0.26, blue: 0.20, alpha: 1.00)
+        heart.alpha = 0
+        gestureView.addSubview(heart)
+        
+        UIView.animate(withDuration: 1,animations: {
+            heart.alpha = 1
+        }, completion: { done in
+            if(done){
+                heart.removeFromSuperview()
+            }
+        })
+    }
+    
+    
 }
