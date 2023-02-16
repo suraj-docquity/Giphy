@@ -9,6 +9,6 @@ import Foundation
 
 enum Constants {
     enum API {
-        static let url = "https://api.giphy.com/v1/gifs/trending?api_key=CqpjNoJdmUgkEyhXAVIFC01bZtK0oZoX&limit=50&rating=g"
+        static let url = "https://api.giphy.com/v1/gifs/trending?api_key=CqpjNoJdmUgkEyhXAVIFC01bZtK0oZoX&limit=100&rating=g"
     }
 }

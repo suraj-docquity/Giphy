@@ -76,7 +76,7 @@ extension FavoriteViewController {
 
         let dItem = self.favGifItems[indexPath.row]
         showTrash(gesture)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
             self.deleteItem(item: dItem)
         })
     }
@@ -98,7 +98,7 @@ extension FavoriteViewController {
             trash.alpha = 1
         }, completion: { done in
             if(done){
-                UIView.animate(withDuration: 1, animations: {
+                UIView.animate(withDuration: 0.4, animations: {
                     trash.alpha = 0
                 }, completion: { done in
                     if(done){

@@ -6,18 +6,30 @@
 //
 
 import Foundation
+import CoreData
 
 extension HomeViewController {
     
     func createItem(gifItem : GifDataDB){
         
-        let newItem = GifItemList(context: homeViewContext)
-        newItem.gifID = gifItem.gifID
-        newItem.gifTitle = gifItem.gifTitle
-        newItem.gifRating = gifItem.gifRating
-        newItem.gifURL = gifItem.gifURL
-        
+        let fetchRequest: NSFetchRequest<GifItemList>
+        fetchRequest = GifItemList.fetchRequest()
+        fetchRequest.predicate = NSPredicate(
+            format: "gifID = %@",gifItem.gifID
+        )
         do{
+            
+            let objects = try homeViewContext.fetch(fetchRequest)
+            if(!objects.isEmpty){
+//                print("found : ",objects) // found duplicate object
+                return
+            }else{
+                let newItem = GifItemList(context: homeViewContext)
+                newItem.gifID = gifItem.gifID
+                newItem.gifTitle = gifItem.gifTitle
+                newItem.gifRating = gifItem.gifRating
+                newItem.gifURL = gifItem.gifURL
+            }
             try homeViewContext.save()
         }
         catch{
