@@ -16,7 +16,7 @@ class HomeViewController: UIViewController{
     private var gifLinks = [String]()
     
     private var layoutToggle : Bool = false
-
+    
     private var cancellables = Set<AnyCancellable>()
     private var tapGesture : UITapGestureRecognizer!
     
@@ -105,13 +105,13 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
+        
         let spacing:CGFloat = 16
         let numberOfItemsPerRow:CGFloat = 1
         let spacingBetweenCells:CGFloat = 8
-
+        
         let totalSpacing = (2 * spacing) + ((numberOfItemsPerRow - 1) * spacingBetweenCells) //Amount of total spacing in a row
-
+        
         if let collection = self.homeGifCollectionView{
             let width = (collection.bounds.width - totalSpacing)/numberOfItemsPerRow
             return CGSize(width: width, height: width)
@@ -128,11 +128,11 @@ extension HomeViewController {
         // tap to location to get index of cell in collection
         let tap = gesture.location(in: self.homeGifCollectionView)
         let indexPath : NSIndexPath = self.homeGifCollectionView.indexPathForItem(at: tap)! as NSIndexPath
-
+        
         let gifTappedData = gifData?.data[indexPath.row]
         
         let newGif = GifDataDB(gifID: gifTappedData!.id, gifTitle: gifTappedData!.title, gifRating: gifTappedData!.rating, gifURL: (gifTappedData?.images.downsized.url)!)
-
+        
         createItem(gifItem: newGif)
         showHeart(gesture)
     }
