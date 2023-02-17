@@ -30,7 +30,7 @@ class FavoriteViewController: UIViewController {
         super.viewDidLoad()
         
         getAllItems()
-        FavCollectionView.collectionViewLayout = UICollectionViewFlowLayout()
+        FavCollectionView?.collectionViewLayout = UICollectionViewFlowLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
