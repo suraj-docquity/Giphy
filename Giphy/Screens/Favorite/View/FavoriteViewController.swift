@@ -11,29 +11,39 @@ import SDWebImage
 class FavoriteViewController: UIViewController {
     
     private var tapGesture : UITapGestureRecognizer!
+    private var layoutToggle : Bool = false
+    private var spacing:CGFloat = 10
+
     
     var favGifItems = [GifItemList]()
 
     let favViewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-
-
+    
+    @IBAction func changeLayoutBtn(_ sender: Any) {
+        layoutToggle = !layoutToggle
+        changeLayout()
+    }
+    
     @IBOutlet var FavCollectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         getAllItems()
-        FavCollectionView.backgroundColor = UIColor(red: 0.89, green: 0.96, blue: 1.00, alpha: 1.00)
+        FavCollectionView.collectionViewLayout = UICollectionViewFlowLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getAllItems()
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        changeLayout()
+    }
 }
 
-
-extension FavoriteViewController : UICollectionViewDelegate, UICollectionViewDataSource {
+extension FavoriteViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return favGifItems.count
@@ -47,22 +57,47 @@ extension FavoriteViewController : UICollectionViewDelegate, UICollectionViewDat
             cell.favGifImgView.image = UIImage(named: "empty-img.png")
             return cell
         }
-            
+        
         cell.favGifImgView.sd_imageIndicator = SDWebImageActivityIndicator.white
         cell.favGifImgView.sd_imageIndicator?.startAnimatingIndicator()
         cell.favGifImgView.sd_setImage(with: gifImgURL, placeholderImage: UIImage(named: "empty-img.png"),options: .continueInBackground,completed: nil)
         
         cell.favGifImgView.contentMode = .scaleToFill
-        cell.favGifImgView.layer.cornerRadius = 3
+        cell.favGifImgView.layer.cornerRadius = 2
         
         cell.layer.cornerRadius = 5
-        cell.backgroundColor =  UIColor(red: 0.98, green: 0.97, blue: 0.95, alpha: 1.00)
+        cell.backgroundColor =  .white
         
         tapGesture = UITapGestureRecognizer(target: self, action: #selector(didDoubleTap(_:)))
         tapGesture.numberOfTapsRequired = 2
         cell.addGestureRecognizer(tapGesture)
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        var numberOfItemsPerRow:CGFloat
+        var spacingBetweenCells:CGFloat
+        
+        if(layoutToggle){
+            numberOfItemsPerRow = 1
+            spacingBetweenCells = 1
+        }else{
+            numberOfItemsPerRow = 2
+            spacingBetweenCells = 2
+        }
+        
+        collectionView.contentInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        
+        let totalSpacing = (2 * spacing) + ((numberOfItemsPerRow - 1) * spacingBetweenCells) // Amount of total spacing in a row
+        
+        if let collection = self.FavCollectionView{
+            let width = (collection.bounds.width - totalSpacing)/numberOfItemsPerRow
+            return CGSize(width: width, height: width)
+        }else{
+            return CGSize(width: 0, height: 0)
+        }
     }
 }
 
@@ -74,7 +109,7 @@ extension FavoriteViewController {
         // tap to location to get index of cell in collection
         let tap = gesture.location(in: self.FavCollectionView)
         let indexPath : NSIndexPath = self.FavCollectionView.indexPathForItem(at: tap)! as NSIndexPath
-
+        
         let dItem = self.favGifItems[indexPath.row]
         showTrash(gesture)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
@@ -111,7 +146,16 @@ extension FavoriteViewController {
     }
 }
 
-
+extension FavoriteViewController {
+    func changeLayout(){
+        if(layoutToggle){
+            FavCollectionView?.collectionViewLayout = UICollectionViewFlowLayout()
+        }
+        DispatchQueue.main.async {
+            self.FavCollectionView?.reloadData()
+        }
+    }
+}
 
 
 

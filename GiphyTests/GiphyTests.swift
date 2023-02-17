@@ -6,7 +6,6 @@
 //
 
 import XCTest
-@testable import Giphy
 
 final class GiphyTests: XCTestCase {
 

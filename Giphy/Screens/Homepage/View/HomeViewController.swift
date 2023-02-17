@@ -16,6 +16,7 @@ class HomeViewController: UIViewController{
     private var gifLinks = [String]()
     
     private var layoutToggle : Bool = false
+    private var spacing:CGFloat = 10
     
     private var cancellables = Set<AnyCancellable>()
     private var tapGesture : UITapGestureRecognizer!
@@ -23,6 +24,7 @@ class HomeViewController: UIViewController{
     @IBOutlet var homeGifCollectionView: UICollectionView!
     
     @IBAction func changeLayoutBtn(_ sender: Any) {
+        layoutToggle = !layoutToggle
         changeLayout()
     }
     
@@ -32,16 +34,18 @@ class HomeViewController: UIViewController{
         super.viewDidLoad()
         configuration()
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        changeLayout()
+    }
 }
-
 
 extension HomeViewController {
     func configuration() {
         
         initViewModel()
-        homeGifCollectionView.backgroundColor = UIColor(red: 0.89, green: 0.96, blue: 1.00, alpha: 1.00)
+        homeGifCollectionView?.collectionViewLayout = UICollectionViewFlowLayout()
     }
-    
     
     func initViewModel(){
         homeViewModel.fetchGifData()
@@ -56,7 +60,6 @@ extension HomeViewController {
             })
             .store(in: &cancellables)
         
-        
         homeViewModel.$gifData
             .sink(receiveValue: { [weak self] data in
                 
@@ -69,7 +72,6 @@ extension HomeViewController {
             .store(in: &cancellables)
     }
 }
-
 
 extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -92,10 +94,10 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         cell.gifImgView.sd_setImage(with: gifImgURL, placeholderImage: UIImage(named: "empty-img.png"),options: .continueInBackground,completed: nil)
         
         cell.gifImgView.contentMode = .scaleToFill
-        cell.gifImgView.layer.cornerRadius = 3
+        cell.gifImgView.layer.cornerRadius = 2
         
         cell.layer.cornerRadius = 5
-        cell.backgroundColor =  UIColor(red: 0.98, green: 0.97, blue: 0.95, alpha: 1.00)
+        cell.backgroundColor =  .white
         
         tapGesture = UITapGestureRecognizer(target: self, action: #selector(didDoubleTap(_:)))
         tapGesture.numberOfTapsRequired = 2
@@ -106,10 +108,19 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let spacing:CGFloat = 16
-        let numberOfItemsPerRow:CGFloat = 1
-        let spacingBetweenCells:CGFloat = 8
+        var numberOfItemsPerRow:CGFloat
+        var spacingBetweenCells:CGFloat
         
+        if(layoutToggle){
+            numberOfItemsPerRow = 1
+            spacingBetweenCells = 1
+        }else{
+            numberOfItemsPerRow = 2
+            spacingBetweenCells = 2
+        }
+        
+        collectionView.contentInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+
         let totalSpacing = (2 * spacing) + ((numberOfItemsPerRow - 1) * spacingBetweenCells) //Amount of total spacing in a row
         
         if let collection = self.homeGifCollectionView{
@@ -170,17 +181,11 @@ extension HomeViewController {
 
 extension HomeViewController {
     func changeLayout(){
-        layoutToggle = !layoutToggle
         if(layoutToggle){
-            homeGifCollectionView.collectionViewLayout = UICollectionViewFlowLayout()
-            DispatchQueue.main.async {
-                self.homeGifCollectionView.reloadData()
-            }
-        }else{
-            homeGifCollectionView.collectionViewLayout.invalidateLayout()
-            DispatchQueue.main.async {
-                self.homeGifCollectionView.reloadData()
-            }
+            homeGifCollectionView?.collectionViewLayout = UICollectionViewFlowLayout()
+        }
+        DispatchQueue.main.async {
+            self.homeGifCollectionView?.reloadData()
         }
     }
 }
