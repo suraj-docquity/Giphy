@@ -15,27 +15,38 @@ class HomeViewController: UIViewController{
     private var homeViewModel = HomeViewModel()
     private var gifData:GifData?
     private var gifLinks = [String]()
-
+    
+    private var layoutToggle : Bool = false
+    private var spacing:CGFloat = 10
+    
     private var cancellables = Set<AnyCancellable>()
     private var tapGesture : UITapGestureRecognizer!
     
     @IBOutlet var homeGifCollectionView: UICollectionView!
+    
+    @IBAction func changeLayoutBtn(_ sender: Any) {
+        layoutToggle = !layoutToggle
+        changeLayout()
+    }
     
     let homeViewContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configuration()
-//        homeGifCollectionView.collectionViewLayout = UICollectionViewFlowLayout()
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        changeLayout()
     }
 }
 
-
 extension HomeViewController {
     func configuration() {
+        
         initViewModel()
+        homeGifCollectionView?.collectionViewLayout = UICollectionViewFlowLayout()
     }
-    
     
     func initViewModel(){
         homeViewModel.fetchGifData()
@@ -50,7 +61,6 @@ extension HomeViewController {
             })
             .store(in: &cancellables)
         
-        
         homeViewModel.$gifData
             .sink(receiveValue: { [weak self] data in
                 
@@ -63,7 +73,6 @@ extension HomeViewController {
             .store(in: &cancellables)
     }
 }
-
 
 extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
@@ -86,9 +95,10 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         cell.gifImgView.sd_setImage(with: gifImgURL, placeholderImage: UIImage(named: "empty-img.png"),options: .continueInBackground,completed: nil)
         
         cell.gifImgView.contentMode = .scaleToFill
-        cell.gifImgView.layer.cornerRadius = 3
+        cell.gifImgView.layer.cornerRadius = 2
         
         cell.layer.cornerRadius = 5
+        cell.backgroundColor =  .white
         
         tapGesture = UITapGestureRecognizer(target: self, action: #selector(didDoubleTap(_:)))
         tapGesture.numberOfTapsRequired = 2
@@ -97,21 +107,30 @@ extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSou
         return cell
     }
     
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//
-//        let spacing:CGFloat = 16
-//        let numberOfItemsPerRow:CGFloat = 2
-//        let spacingBetweenCells:CGFloat = 8
-//
-//        let totalSpacing = (2 * spacing) + ((numberOfItemsPerRow - 1) * spacingBetweenCells) //Amount of total spacing in a row
-//
-//        if let collection = self.homeGifCollectionView{
-//            let width = (collection.bounds.width - totalSpacing)/numberOfItemsPerRow
-//            return CGSize(width: width, height: width)
-//        }else{
-//            return CGSize(width: 0, height: 0)
-//        }
-//    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        var numberOfItemsPerRow:CGFloat
+        var spacingBetweenCells:CGFloat
+        
+        if(layoutToggle){
+            numberOfItemsPerRow = 1
+            spacingBetweenCells = 1
+        }else{
+            numberOfItemsPerRow = 2
+            spacingBetweenCells = 2
+        }
+        
+        collectionView.contentInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+
+        let totalSpacing = (2 * spacing) + ((numberOfItemsPerRow - 1) * spacingBetweenCells) //Amount of total spacing in a row
+        
+        if let collection = self.homeGifCollectionView{
+            let width = (collection.bounds.width - totalSpacing)/numberOfItemsPerRow
+            return CGSize(width: width, height: width)
+        }else{
+            return CGSize(width: 0, height: 0)
+        }
+    }
     
 }
 
@@ -122,13 +141,10 @@ extension HomeViewController {
         let tap = gesture.location(in: self.homeGifCollectionView)
         let indexPath : NSIndexPath = self.homeGifCollectionView.indexPathForItem(at: tap)! as NSIndexPath
         
-//        print("Double tapped index \(indexPath.row) ",gifLinks[indexPath.row])
-//        print("Double tapped index \(indexPath.row) ",gifData?.data[indexPath.row])
-
         let gifTappedData = gifData?.data[indexPath.row]
         
         let newGif = GifDataDB(gifID: gifTappedData!.id, gifTitle: gifTappedData!.title, gifRating: gifTappedData!.rating, gifURL: (gifTappedData?.images.downsized.url)!)
-
+        
         createItem(gifItem: newGif)
         showHeart(gesture)
         
@@ -164,6 +180,16 @@ extension HomeViewController {
             }
         })
     }
-    
-    
+}
+
+
+extension HomeViewController {
+    func changeLayout(){
+        if(layoutToggle){
+            homeGifCollectionView?.collectionViewLayout = UICollectionViewFlowLayout()
+        }
+        DispatchQueue.main.async {
+            self.homeGifCollectionView?.reloadData()
+        }
+    }
 }
