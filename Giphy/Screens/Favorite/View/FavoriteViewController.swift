@@ -7,6 +7,7 @@
 
 import UIKit
 import SDWebImage
+import Toast
 
 class FavoriteViewController: UIViewController {
     
@@ -79,6 +80,7 @@ extension FavoriteViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
             self.deleteItem(item: dItem)
         })
+        self.view.makeToast("Removed from favorites",duration: 2)
     }
     
     func showTrash(_ gesture: UITapGestureRecognizer){

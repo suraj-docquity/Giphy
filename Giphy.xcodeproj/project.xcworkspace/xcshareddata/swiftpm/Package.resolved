@@ -8,6 +8,15 @@
         "revision" : "7ccdcb02fb0ab47409a6602769cea0486be2a209",
         "version" : "5.15.2"
       }
+    },
+    {
+      "identity" : "toast-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/scalessec/Toast-Swift",
+      "state" : {
+        "revision" : "0c9493eeacb102cc614da385cfaaf475379f4ab4",
+        "version" : "5.0.1"
+      }
     }
   ],
   "version" : 2

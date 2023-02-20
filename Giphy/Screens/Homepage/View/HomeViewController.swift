@@ -8,6 +8,7 @@
 import UIKit
 import Combine
 import SDWebImage
+import Toast
 
 class HomeViewController: UIViewController{
     
@@ -130,6 +131,9 @@ extension HomeViewController {
 
         createItem(gifItem: newGif)
         showHeart(gesture)
+        
+        self.view.makeToast("Added to favorites",duration: 2)
+
     }
     
     func showHeart(_ gesture: UITapGestureRecognizer){
